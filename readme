@@ -1,0 +1,55 @@
+Aluno: Henrique Pereira Bores [10202123]
+
+Codificado em C++.
+
+
+Compilação e execução:
+	Compilar:
+		Acompanha o makefile onde para compilar simplesmente dar um 'make'.
+		'make clean' elimina todos os arquivo *.o 
+	Execução:
+		Vai criar um executavel 'grafo' onde é só executa-lo e vai receber, como especificado, entradas e saidas pelo dispositivo padrão.
+	
+Notas:
+	
+	Não está sendo feita analise do grafo para fazer as rotinas de arvoreminima, ordemtopologica e menorcaminho para ver se o grafo é conectado. 
+	No caso de ordem topologica ele retorna uma ordem referida a um subgrafo concatenado com as ordems dos outros sub-grafos. Mas não há nenhuma distinção onde um começa e outro termina.
+ 	
+	Sobre ciclos tanto arvoreminima e ordemtoplogica é capaz de lidar com eles. No caso de ordemtopologica o resultado retornado é vazio.
+
+	Quando há somente um vertice na aresta ordemtopologica e arvoreminima retornam vazios.
+	
+	Uma outra nota é ausência de 'espaços' na saída. Na especificação havia a presença de alguns mas na dúvida se aquilo era simplesmente consequência da formatação HTML optei por não usa-los.
+	Exemplificando:
+	Na especificação do trabalho há essa saída como exemplo. Há espaços entre a virgula e as aspas.
+		{"vertice":{"ID":1, "dado":"Fulano de Tal", "resposta":"sucesso"}}
+	Na saída:
+		{"vertice":{"ID":1,"dado":"Fulano de Tal","resposta":"sucesso"}}
+	Não há presença dos espaço. Na especificação do JSON não nenhuma informação se deve ou não ter a presença. 
+	Optei por deixar sem os espaços que deixa uma viasualização mais compacta e , de algum modo, agradável.
+
+Sobre os algoritmos:
+	
+	Arvore Minima:
+		Este aqui foi implementado um Dijkstra com uma pequena variação. Ao invés de unir os vertices e verificar se há ciclos, simplesmente pintei cada novo subgrafo de uma cor.
+		exemplificando:
+			união(Origem, Destino)
+			Se Origem e Destino não tiverem cor
+				Um novo subgrafo é criado com uma nova cor
+			Se somente um está pintado
+				Inclui o sem cor no sub grafo pintado e também o pinta
+			Se os dois tiverem com cores diferentes
+				Pinta um inteiro subgrafo com a cor do outro subgrafo
+				
+			Para tentar otimizar a execução utilizei espaço. Tendo um vetor 2d marcando os subgrafos criados, sua cor e seus vertices integrantes.
+			
+	Menor Caminho:
+			Foi utilizado uma aplicação direta do algoritmo de kruskal. O mesmo que o senhor exemplificou em aula.
+			A diferença é que ele sempre calcula a menor distancia da origem a todos os nodos mesmo que já tenha achado a menor distância para id2.
+			
+	Ordemtopologica:
+			Uma aplicação do algoritmo de Kahn.
+	
+	conexao:
+		Preferi utilizar a busca por profundidade por ter uma aplicação recursiva mais intuitiva.
+		
